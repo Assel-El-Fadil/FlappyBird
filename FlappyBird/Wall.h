@@ -6,12 +6,44 @@ class wall {
 	private:
 		float x = 800.0f, y = 600.0f;
 		float width = 70, height = 200;
-		float gap = 150;
+		float gap = 100;
 
 	public:
 
 		wall(float height) {
 			this->height = height;
+		};
+
+		float getX() {
+			return x;
+		};
+		float getY() {
+			return y;
+		};
+		float getWidth() {
+			return width;
+		};
+		float getHeight() {
+			return height;
+		};
+		float getGap() {
+			return gap;
+		};
+
+		float setX(float x) {
+			this->x = x;
+		};
+		float setY(float y) {
+			this->y = y;
+		};
+		float setWidth(float width) {
+			this->width = width;
+		};
+		float setHeight(float height) {
+			this->height = height;
+		};
+		float setGap(float gap) {
+			this->gap = gap;
 		};
 
 		void draw() {
