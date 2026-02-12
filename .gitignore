@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# everything other than the code files
+FlappyBird.sln
+/FlappyBird/x64/
+/FlappyBird/FlappyBird.vcxproj
+/FlappyBird/FlappyBird.vcxproj.filters
+/FlappyBird/FlappyBird.vcxproj.user

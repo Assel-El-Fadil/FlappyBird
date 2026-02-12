@@ -5,6 +5,18 @@
 
 int WIDTH = 800, HEIGHT = 600;
 
+player ball(50, 300);
+wall pipe(200);
+
+
+void draw(){
+	ball.draw();
+	pipe.draw();
+}
+
+void update() {
+	pipe.move();
+}
 
 int main() {
 	glfwInit();
@@ -23,18 +35,14 @@ int main() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(0.8f, 0.8f, 0.8f, 0.3f);
 
-	player ball(50, 300);
-	wall pipe(200);
-
 	// Game loop
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		// Render game objects here
-		ball.draw();
-		pipe.draw();
+		draw();
 
-		pipe.move();
+		update();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
