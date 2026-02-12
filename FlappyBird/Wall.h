@@ -8,6 +8,8 @@ class wall {
 		float width = 70, height = 200;
 		float gap = 100;
 
+		bool passed = false;
+
 	public:
 
 		wall(float height) {
@@ -29,22 +31,29 @@ class wall {
 		float getGap() {
 			return gap;
 		};
+		bool getPassed() {
+			return passed;
+		};
 
-		float setX(float x) {
+		void setX(float x) {
 			this->x = x;
 		};
-		float setY(float y) {
+		void setY(float y) {
 			this->y = y;
 		};
-		float setWidth(float width) {
+		void setWidth(float width) {
 			this->width = width;
 		};
-		float setHeight(float height) {
+		void setHeight(float height) {
 			this->height = height;
 		};
-		float setGap(float gap) {
+		void setGap(float gap) {
 			this->gap = gap;
 		};
+		void setPassed(bool passed) {
+			this->passed = passed;
+		};
+
 
 		void draw() {
 			glColor3f(0.0f, 0.0f, 0.0f); // Set color to black
