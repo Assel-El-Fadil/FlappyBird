@@ -7,6 +7,9 @@ int WIDTH = 800, HEIGHT = 600;
 float gravity = 800.0f;
 float dt = 0.015f;
 float spawnTimer = 0.0f;
+float radius = 8.0f;
+
+bool gameOver = false;
 
 player ball(50, 300, gravity);
 wall pipe(200);
@@ -49,6 +52,22 @@ void static removeOffscreenPipes() {
 	}
 }
 
+bool collisionDetection() {
+	if(ball.getY() < 0 || ball.getY() > HEIGHT) {
+		return true;
+	}
+
+	for(int i = 0; i < pipes.size(); i++){
+		if (ball.getX() + radius > pipes[i].getX() && ball.getX() + radius < pipes[i].getX() + pipe.getWidth()) {
+			if (ball.getY() + radius > HEIGHT - pipes[i].getHeight() || ball.getY() - radius < HEIGHT - pipes[i].getHeight() - pipes[i].getGap()) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
 void static draw(){
 	ball.draw();
 	drawPipes();
@@ -65,6 +84,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 	{
 		ball.jump();
+	}
+
+	if(key == GLFW_KEY_R && action == GLFW_PRESS && gameOver == true) {
+		gameOver = false;
+		spawnTimer = 0.0f;
+		ball.setX(50);
+		ball.setY(300);
+		pipes.clear();
 	}
 }
 
@@ -89,11 +116,15 @@ int main() {
 
 	// Game loop
 	while (!glfwWindowShouldClose(window)) {
+
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		// Update game logic here
-		update();
+		if (!gameOver){
 
+			// Update game logic here
+			update();
+			gameOver = collisionDetection();
+		}
 		// Render game objects here
 		draw();
 

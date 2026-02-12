@@ -14,6 +14,20 @@ class player {
 			this->x = x; this->y = y; this->acceleration = acceleration;
 		};
 
+		float getX() {
+			return x;
+		};
+		float getY() {
+			return y;
+		};
+
+		void setX(float x) {
+			this->x = x;
+		};
+		void setY(float y) {
+			this->y = y;
+		};
+
 		void update(float dt) {
 			velocity += acceleration*dt;
 			y += velocity*dt;
