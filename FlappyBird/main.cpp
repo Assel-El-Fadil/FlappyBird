@@ -4,19 +4,30 @@
 #include "Wall.h"
 
 int WIDTH = 800, HEIGHT = 600;
+float gravity = 800.0f;
+float dt = 0.015f;
 
-player ball(50, 300);
+player ball(50, 300, gravity);
 wall pipe(200);
 
-
-void draw(){
+void static draw(){
 	ball.draw();
 	pipe.draw();
 }
 
-void update() {
+void static update() {
+	ball.update(dt);
 	pipe.move();
 }
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		ball.jump();
+	}
+}
+
 
 int main() {
 	glfwInit();
@@ -33,16 +44,18 @@ int main() {
 	glLoadIdentity();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glfwSetKeyCallback(window, key_callback);
 	glClearColor(0.8f, 0.8f, 0.8f, 0.3f);
 
 	// Game loop
 	while (!glfwWindowShouldClose(window)) {
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		// Update game logic here
+		update();
+
 		// Render game objects here
 		draw();
-
-		update();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
